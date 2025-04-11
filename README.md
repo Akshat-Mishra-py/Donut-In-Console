@@ -81,7 +81,7 @@ If your console is too small, you might see artifacts or leftover visuals. Resiz
 
 Want to see the donut in action? Check out the preview! 👇
 
-<a href="https://youtube.com/shorts/PIdHU3gy6KI?feature=share"><img src="https://img.youtube.com/vi/PIdHU3gy6KI/0.jpg" alt = "Preview" width = 700></a>
+<a href="https://youtube.com/shorts/PIdHU3gy6KI?feature=share"><img src="https://img.youtube.com/vi/PIdHU3gy6KI/0.jpg" alt = "Preview" width = 500></a>
 ---
 
 ## Installation
@@ -194,7 +194,7 @@ The Console Donut Renderer relies on a combination of **voxel-based geometry**, 
 
 3. **Output**:
    - The ASCII representation of the donut is constructed line by line.
-   - Each line is printed to the console with a slight delay to simulate smooth animation (~25 FPS).
+   - Each frame is then printed to the console with a slight delay to simulate smooth animation (~25 FPS).
 
 ---
 
