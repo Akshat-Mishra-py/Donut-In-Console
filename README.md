@@ -81,7 +81,11 @@ If your console is too small, you might see artifacts or leftover visuals. Resiz
 
 Want to see the donut in action? Check out the preview! 👇
 
-<a href="https://youtube.com/shorts/PIdHU3gy6KI?feature=share"><img src="https://img.youtube.com/vi/PIdHU3gy6KI/0.jpg" alt = "Preview" width = 500></a>
+<video src = ".\Sample Video\Example1.mp4"  width=1000 controls></video>
+<video src = ".\Sample Video\Example2.mp4" width=1000 controls></video>
+
+<a href="https://youtube.com/shorts/PIdHU3gy6KI?feature=share">More Previews</a>
+
 ---
 
 ## Installation
