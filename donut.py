@@ -48,9 +48,9 @@ def Rotate(X, Y, Z, ux, uy, uz, theta) -> np.array:
     cos = np.cos(theta)
     one_cos= 1-np.cos(theta)
 
-    rotation_matrix = np.array([[cos + ((ux**2)*one_cos), ux*uy*one_cos-uz*sin, ux*uz*one_cos-uy*sin],
-                                [uy*ux*one_cos-uz*sin, cos + ((uy**2)*one_cos), uy*uz*one_cos-ux*sin],
-                                [uz*ux*one_cos-uy*sin, uz*uy*one_cos-ux*sin, cos + ((uz**2)*one_cos)]])
+    rotation_matrix = np.array([[cos + ((ux**2)*one_cos), ux*uy*one_cos-uz*sin, ux*uz*one_cos+uy*sin],
+                                [uy*ux*one_cos+uz*sin, cos + ((uy**2)*one_cos), uy*uz*one_cos-ux*sin],
+                                [uz*ux*one_cos-uy*sin, uz*uy*one_cos+ux*sin, cos + ((uz**2)*one_cos)]])
 
     # Calculating new vector and approximating and clipping to (0,Grid)
     vector = np.stack([X,Y,Z], axis=-1)
