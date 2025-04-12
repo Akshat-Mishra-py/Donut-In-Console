@@ -81,8 +81,8 @@ If your console is too small, you might see artifacts or leftover visuals. Resiz
 
 Want to see the donut in action? Check out the preview! 👇
 
-<video src = "Sample Video\Example1.mp4"  width=1000 controls></video>
-<video src = "Sample Video\Example2.mp4" width=1000 controls></video>
+<video src = ".\Sample Video\Example1.mp4"  width=1000 controls></video>
+<video src = ".\Sample Video\Example2.mp4" width=1000 controls></video>
 
 <a href="https://youtube.com/shorts/PIdHU3gy6KI?feature=share">More Previews</a>
 
