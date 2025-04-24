@@ -94,8 +94,8 @@ Setting up the donut renderer is super simple! Let’s get started:
 
 1. **Clone the repository**:  
    ```bash
-   git clone https://github.com/Akshat-Mishra-py/console-donut-renderer.git
-   cd console-donut-renderer
+   git clone https://github.com/Akshat-Mishra-py/Donut-In-Console.git
+   cd Donut-In-Console
    ```
 
 2. **Install dependencies**:  
