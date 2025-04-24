@@ -144,9 +144,9 @@ The Console Donut Renderer relies on a combination of **voxel-based geometry**, 
 - The torus rotates in 3D space using a **rotation matrix**. The axis of rotation is defined by a user-specified **rotation vector** which is normalized before use.
 - The rotation matrix for an arbitrary axis `(ux, uy, uz)` and angle `θ` is:
   ```bash
-  | cos(θ) + ux²(1-cos(θ))        uy*ux(1-cos(θ)) - uz*sin(θ)   uz*ux(1-cos(θ)) + uy*sin(θ) |
-  | uy*ux(1-cos(θ)) + uz*sin(θ)   cos(θ) + uy²(1-cos(θ))        uz*uy(1-cos(θ)) - ux*sin(θ) |
-  | uz*ux(1-cos(θ)) - uy*sin(θ)   uz*uy(1-cos(θ)) + ux*sin(θ)   cos(θ) + uz²(1-cos(θ))      | 
+  | cos(θ) + ux²(1-cos(θ))        uy*ux(1-cos(θ)) - uz*sin(θ)   uz*ux(1-cos(θ)) - uy*sin(θ) |
+  | uy*ux(1-cos(θ)) - uz*sin(θ)   cos(θ) + uy²(1-cos(θ))        uz*uy(1-cos(θ)) - ux*sin(θ) |
+  | uz*ux(1-cos(θ)) - uy*sin(θ)   uz*uy(1-cos(θ)) - ux*sin(θ)   cos(θ) + uz²(1-cos(θ))      | 
   ```
 
 - Each voxel point in the torus is rotated around the specified axis using this matrix. The resulting coordinates are clipped and mapped back to the grid.
