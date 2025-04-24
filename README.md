@@ -16,7 +16,7 @@ Welcome to the **Console Donut Renderer**! 🎉 This project is a mesmerizing ex
       - [ASCII Shading](#4-ascii-shading)
       - [Rendering Process](#5-rendering-process)
       - [Performance Optimization](#6-performance-optimization)
-      - [Costomization](#7-customization)
+      - [Customization](#7-customization)
 
    - [Dependencies](#dependencies)
    -  [License](#license)
@@ -81,8 +81,8 @@ If your console is too small, you might see artifacts or leftover visuals. Resiz
 
 Want to see the donut in action? Check out the preview! 👇
 
-<video src = ".\Sample Video\Example1.mp4"  width=1000 controls></video>
-<video src = ".\Sample Video\Example2.mp4" width=1000 controls></video>
+<video src = "https://github.com/user-attachments/assets/1de9462b-f762-4e68-a978-b8419dd4b01b" width=300 controls></video>
+<video src = "https://github.com/user-attachments/assets/4e73448f-c4c3-437d-98b8-4895fcdb661b"  width=300 controls></video>
 
 <a href="https://youtube.com/shorts/PIdHU3gy6KI?feature=share">More Previews</a>
 
@@ -94,8 +94,8 @@ Setting up the donut renderer is super simple! Let’s get started:
 
 1. **Clone the repository**:  
    ```bash
-   git clone https://github.com/Akshat-Mishra-py/console-donut-renderer.git
-   cd console-donut-renderer
+   git clone https://github.com/Akshat-Mishra-py/Donut-In-Console.git
+   cd Donut-In-Console
    ```
 
 2. **Install dependencies**:  
