@@ -4,13 +4,13 @@ import time
 
 
 # Constants
-GRID = 40
+GRID = int(input("Grid: "))
 HALF_GRID = GRID//2
 CENTER = np.array([HALF_GRID, HALF_GRID,HALF_GRID])
-LIGHTING = 1 # Light Ratio for changing Shading
+LIGHTING = int(input("Light Mode: ")) # Light Ratio for changing Shading
 
 # Changing Draw mode
-ASCII_MODE = 1
+ASCII_MODE = int(input("ASCII MODE: "))
 if ASCII_MODE == 0:
     string =" `.-\':_,^=;><+!rc*/z?sLTv)J7(|FifI31tlu[neoZ5Yxjya]2ESwqkP6h9d4VpOGbUAKXHm8RD#$Bg0MNWQ%&@"
     FILLER = [*string]
@@ -76,6 +76,8 @@ X, Y, Z = np.where(condition)
 TORUS = np.array([X,Y,Z])
 
 rotate = 0
+
+centeringSpace = int(input('Enter No. of tabs: '))
 while True:
     # Rotate X,Y,Z 
     t1 = time.time()
@@ -124,12 +126,12 @@ while True:
         for j in range(GRID):
             val = abs(screen[i][j])
             string +=str( FILLER[int(val)])*2
-        string += "\n"
+        string += "\n" + "\t"*centeringSpace
 
-    string = string.removesuffix('\n')
+    string = string.removesuffix("\n" + "\t"*centeringSpace)
 
 
-    print('\033[H\033[36m', end='')
+    print('\033[H\033[3 6m', end='')
     print(string,flush=True, end='')
 
 
