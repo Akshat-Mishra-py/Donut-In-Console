@@ -4,14 +4,14 @@ import argumentParser
 args = argumentParser.parser.parse_args()
 
 # Constants
-FRAME_RATE = 25
-GRID = int(input("Grid: "))
+FRAME_RATE = args.frame_rate
+GRID = args.grid
 HALF_GRID = GRID//2
 CENTER = np.array([HALF_GRID, HALF_GRID,HALF_GRID])
-LIGHTING = int(input("Light Mode: ")) # Light Ratio for changing Shading
+LIGHTING = args.light_ratio # Light Ratio for changing Shading
 
 # Changing Draw mode
-ASCII_MODE = int(input("ASCII MODE: "))
+ASCII_MODE = args.ascii_mode
 if ASCII_MODE == 0:
     string =" `.-\':_,^=;><+!rc*/z?sLTv)J7(|FifI31tlu[neoZ5Yxjya]2ESwqkP6h9d4VpOGbUAKXHm8RD#$Bg0MNWQ%&@"
     FILLER = [*string]
@@ -26,14 +26,14 @@ else:
     FILLER = (' ','`','.', '-','\'', ':','_','^', '=', '+', '*', '#', '%', '@')
 
 
-LIGHT = [-1,-1,2] #Light Direction Vector
+LIGHT = args.light_direction or [-1,-1,2] #Light Direction Vector
 
 # Rotation Axis & Normalisation
-AXIS =  [1,0,1]
+AXIS =  args.axis or [1,0,1]
 ROTATION_AXIS = np.array(AXIS, dtype=np.float64)
 ROTATION_AXIS = ROTATION_AXIS/np.linalg.norm(ROTATION_AXIS)
 
-ROTATION_SPEED = 5 #Per Frame
+ROTATION_SPEED = args.rotation_speed #Per Frame
 
 # Donuts Radii
 R = major_Rad = GRID//3.5
@@ -76,7 +76,7 @@ TORUS = np.array([X,Y,Z])
 
 rotate = 0
 
-centeringSpace = int(input('Enter No. of tabs: '))
+centeringSpace = args.center_tabs
 
 donutCache = dict() #Cache for Donut rotations that was computed
 
