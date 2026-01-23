@@ -1,9 +1,10 @@
 import numpy as np
 import time
-
-
+import argumentParser
+args = argumentParser.parser.parse_args()
 
 # Constants
+FRAME_RATE = 25
 GRID = int(input("Grid: "))
 HALF_GRID = GRID//2
 CENTER = np.array([HALF_GRID, HALF_GRID,HALF_GRID])
@@ -33,8 +34,6 @@ ROTATION_AXIS = np.array(AXIS, dtype=np.float64)
 ROTATION_AXIS = ROTATION_AXIS/np.linalg.norm(ROTATION_AXIS)
 
 ROTATION_SPEED = 5 #Per Frame
-
-TORUS = None
 
 # Donuts Radii
 R = major_Rad = GRID//3.5
@@ -78,63 +77,71 @@ TORUS = np.array([X,Y,Z])
 rotate = 0
 
 centeringSpace = int(input('Enter No. of tabs: '))
+
+donutCache = dict() #Cache for Donut rotations that was computed
+
 while True:
     # Rotate X,Y,Z 
     t1 = time.time()
     rotate += 5
-    X,Y,Z = Rotate(TORUS[0],TORUS[1],TORUS[2], ROTATION_AXIS[0],ROTATION_AXIS[1],ROTATION_AXIS[2], np.deg2rad(rotate))
 
-    # Generating Normals Pass
-    Q = np.sqrt(X**2 + Y**2) + 1e-8
-    nX = 2*X*(1-R/Q) 
-    nY = 2*Y*(1-R/Q)
-    nZ = 2*Z
+    # Cache Validation
+    if rotate in donutCache.keys():
+        string=donutCache[rotate] # Cache Retrieval
 
-    normal = np.stack([nX, nY,nZ], axis = -1)
-    norm = np.linalg.norm(normal)
-    normal = normal/norm
+    else:
+        X,Y,Z = Rotate(TORUS[0],TORUS[1],TORUS[2], ROTATION_AXIS[0],ROTATION_AXIS[1],ROTATION_AXIS[2], np.deg2rad(rotate))
 
+        # Generating Normals Pass
+        Q = np.sqrt(X**2 + Y**2) + 1e-8
+        nX = 2*X*(1-R/Q) 
+        nY = 2*Y*(1-R/Q)
+        nZ = 2*Z
 
-    # Calculating lights
-    light = np.array(LIGHT)
-    light = light / np.linalg.norm(light)
-
-
-    brightness = np.einsum("ij,j->i",normal, light)
-    brightness = np.clip(brightness, 0,1)
-    brightness = np.interp(brightness,[brightness.min(), brightness.max()], [0.2,1])
-
-    # Creating Buffers
-    screen = np.zeros((GRID,GRID))
-    zbuffer = np.full((GRID, GRID), np.inf)
-
-    z_max,z_min = Z.max(), Z.min()
-    Z = -np.interp(Z, (z_min, z_max), (0,1))
-
-    # Resterizing Donuts
-    l = 0
-    for i,j,k in zip(X,Y,Z):
-        if k<zbuffer[i][j]:
-            zbuffer[i][j] = k
-            screen[i][j] = (brightness[l]*LIGHTING-(k*( 1- LIGHTING)))*(len(FILLER)-1)
-        l+=1
+        normal = np.stack([nX, nY,nZ], axis = -1)
+        norm = np.linalg.norm(normal)
+        normal = normal/norm
 
 
-    # Converting to AASCII
-    string = ""
-    for i in range(GRID):
-        for j in range(GRID):
-            val = abs(screen[i][j])
-            string +=str( FILLER[int(val)])*2
-        string += "\n" + "\t"*centeringSpace
+        # Calculating lights
+        light = np.array(LIGHT)
+        light = light / np.linalg.norm(light)
 
-    string = string.removesuffix("\n" + "\t"*centeringSpace)
 
+        brightness = np.einsum("ij,j->i",normal, light)
+        brightness = np.clip(brightness, 0,1)
+        brightness = np.interp(brightness,[brightness.min(), brightness.max()], [0.2,1])
+
+        # Creating Buffers
+        screen = np.zeros((GRID,GRID))
+        zbuffer = np.full((GRID, GRID), np.inf)
+
+        z_max,z_min = Z.max(), Z.min()
+        Z = -np.interp(Z, (z_min, z_max), (0,1))
+
+        # Resterizing Donuts
+        l = 0
+        for i,j,k in zip(X,Y,Z):
+            if k<zbuffer[i][j]:
+                zbuffer[i][j] = k
+                screen[i][j] = (brightness[l]*LIGHTING-(k*( 1- LIGHTING)))*(len(FILLER)-1)
+            l+=1
+
+        # Converting to AASCII
+        string = ""
+        for i in range(GRID):
+            for j in range(GRID):
+                val = abs(screen[i][j])
+                string +=str( FILLER[int(val)])*2
+            string += "\n" + "\t"*centeringSpace
+
+        string = string.removesuffix("\n" + "\t"*centeringSpace)
+
+        donutCache[rotate]=string #Caching
 
     print('\033[H\033[3 6m', end='')
     print(string,flush=True, end='')
 
-
     t2 = time.time()
-    if 1/25 + t1-t2 > 0:
-        time.sleep(1/25 + t1-t2)
+    if 1/FRAME_RATE + t1-t2 > 0:
+        time.sleep(1/FRAME_RATE + t1-t2)
